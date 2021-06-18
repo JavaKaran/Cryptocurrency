@@ -11,7 +11,7 @@ contract kstSale {
 
     event Sell(address _buyer, uint256 _amount);
 
-    constructor (kst _tokenContract, uint256 _tokenPrice) {
+    constructor (kst _tokenContract, uint256 _tokenPrice) public {
         admin = msg.sender;
         tokenContract = _tokenContract;
         tokenPrice = _tokenPrice;
@@ -31,10 +31,10 @@ contract kstSale {
         emit Sell(msg.sender, _numberOfTokens);
     }
 
-    function endSale() internal {
+    function endSale(address payable admin) public payable {
         require(msg.sender == admin);
         require(tokenContract.transfer(admin, tokenContract.balanceOf(address(this))));
 
-        payable(admin).transfer(address(this).balance);
+         admin.transfer(address(this).balance);
     }
 }
