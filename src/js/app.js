@@ -11,8 +11,8 @@ App = {
       console.log("App initialized...")
       return App.initWeb3();
     },
-  
-    initWeb3: function() {
+      
+      initWeb3: function() {
       if (typeof web3 !== 'undefined') {
         // If a web3 instance is already provided by Meta Mask.
         App.web3Provider = web3.currentProvider;
@@ -100,7 +100,7 @@ App = {
           kstInstance = instance;
           return kstInstance.balanceOf(App.account);
         }).then(function(balance) {
-          $('.kst-balance').html(balance.toNumber());
+          $('.token-balance').html(balance.toNumber());
           App.loading = false;
           loader.hide();
           content.show();
